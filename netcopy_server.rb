@@ -44,6 +44,7 @@ post "/" do
 end
 
 get "/:paste_name" do
+  content_type :text
   body = find_paste(params["paste_name"])
   body
 end
