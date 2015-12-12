@@ -1,0 +1,47 @@
+#!/bin/bash
+
+command -v curl >/dev/null 2>&1 || { echo >&2 "cURL is required to install netcopy. Get it at http://curl.haxx.se"; exit 1; }
+
+prefix=${PREFIX:-/usr/local/bin}
+full_path="$prefix/netcopy"
+default_netcopy_url=${NETCOPY_URL:-"http://localhost:8080"}
+
+echo -n "Creating executable at $full_path... "
+
+cat <<EOF > $full_path
+#!/bin/bash
+usage="Usage: netcopy [-hv] [file]"
+netcopy_url=\${NETCOPY_URL:-$default_netcopy_url}
+
+if [ -n "\$1" ]
+then
+  case \$1 in
+    "--help" | "-h")
+      echo \$usage
+      exit
+      ;;
+    "--version" | "-v")
+      echo "netcopy 1.0"
+      exit
+      ;;
+    *)
+      if [ -e \$1 ]
+      then
+        file=\$1
+      else
+        echo >&2 "netcopy: could not read from file \"\$1\""
+        exit 1
+      fi
+      ;;
+  esac
+else
+  # Read from STDIN
+  file="-"
+fi
+
+curl \$netcopy_url --data-binary @\$file
+EOF
+
+chmod +x $full_path
+
+echo "done."

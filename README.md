@@ -27,3 +27,20 @@ To start the server at <http://localhost:8080>, run:
 
     $ curl http://localhost:8080/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
     hello, world
+
+## Client
+
+For added convenience, run `bin/install` to create a wrapper around the above
+cURL command.
+
+After installing, you can now use the service more simply:
+
+    $ echo "hello, world" | netcopy
+
+To specify a URL for the netcopy service other than `http://localhost:8080`, use
+`NETCOPY_URL=http://example.org bin/install` when installing or use
+`NETCOPY_URL=http://example.org netcopy` when running.
+
+By default, this will be installed to `/usr/local/bin` but another path can be
+provided to the install script like: `PREFIX=/home/max/bin bin/install`.
+
