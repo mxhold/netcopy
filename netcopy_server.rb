@@ -5,14 +5,7 @@ set(:startup_hook) do
   database_file = "#{environment}.db"
   first_run = !File.exist?(database_file)
   set(:db, SQLite3::Database.new(database_file))
-  if first_run
-    db.execute <<-SQL
-CREATE TABLE pastes (
-  name TEXT,
-  body BLOB
-)
-    SQL
-  end
+  db.execute("CREATE TABLE pastes (name TEXT, body BLOB)") if first_run
 end
 
 configure do

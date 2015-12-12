@@ -1,6 +1,5 @@
-require "rack/test"
 ENV["RACK_ENV"] = "test"
-
+require "rack/test"
 require_relative "../netcopy_server"
 
 RSpec.describe "netcopy_server.rb" do
@@ -32,9 +31,9 @@ Usage:
     it "creates a paste" do
       post "/", "hello, world!"
 
-      last_paste_body = app.db.execute(<<-SQL).flatten.first
-SELECT body FROM pastes ORDER BY rowid DESC LIMIT 1
-SQL
+      last_paste_body = app.db.execute(
+        "SELECT body FROM pastes ORDER BY rowid DESC LIMIT 1"
+      ).flatten.first
 
       expect(last_paste_body).to eql "hello, world!"
     end
