@@ -18,7 +18,7 @@ helpers do
   end
 
   def create_paste(name, body)
-    execute("INSERT INTO PASTES (name, body) VALUES (?, ?)", [name, body])
+    execute("INSERT INTO pastes (name, body) VALUES (?, ?)", [name, body])
   end
 
   def find_paste(name)

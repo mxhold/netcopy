@@ -1,2 +1,2 @@
-require "./netcopy_server"
+require "./lib/netcopy"
 run Sinatra::Application

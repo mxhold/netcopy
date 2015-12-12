@@ -1,8 +1,8 @@
 ENV["RACK_ENV"] = "test"
 require "rack/test"
-require_relative "../netcopy_server"
+require_relative "../lib/netcopy"
 
-RSpec.describe "netcopy_server.rb" do
+RSpec.describe "netcopy" do
   include Rack::Test::Methods
 
   def app
