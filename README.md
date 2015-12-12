@@ -4,7 +4,8 @@
 [![Code Climate](https://codeclimate.com/github/mxhold/netcopy/badges/gpa.svg)](https://codeclimate.com/github/mxhold/netcopy)
 [![Test Coverage](https://codeclimate.com/github/mxhold/netcopy/badges/coverage.svg)](https://codeclimate.com/github/mxhold/netcopy/coverage)
 
-netcopy is a very simple pastebin service written in Ruby.
+netcopy is a very simple [pastebin](https://en.wikipedia.org/wiki/Pastebin)
+service written in Ruby.
 
 ## Getting started
 
