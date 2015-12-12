@@ -19,9 +19,9 @@ RSpec.describe "netcopy_server.rb" do
 Usage:
 
   $ echo "hello, world" | curl http://example.org -d @-
-  http://example.org/2dr8p
+  /3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
 
-  $ curl http://example.org/2dr8p
+  $ curl http://example.org/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
   "hello, world"
 </pre>
       USAGE
@@ -37,7 +37,16 @@ SELECT body FROM pastes ORDER BY rowid DESC LIMIT 1
 SQL
 
       expect(last_paste_body).to eql "hello, world!"
-      expect(last_response.body).to eql "/abc123"
+    end
+
+    it "assigns and returns a unique name to the paste" do
+      post "/", "hello, world!"
+      paste1_name = last_response.body
+
+      post "/", "hello, world!"
+      paste2_name = last_response.body
+
+      expect(paste1_name).not_to eql paste2_name
     end
   end
 

@@ -30,11 +30,12 @@ get "/" do
 end
 
 post "/" do
-  app.db.execute(<<-SQL, ["abc123", request.body.read])
+  name = SecureRandom.uuid
+  app.db.execute(<<-SQL, [name, request.body.read])
 INSERT INTO pastes (name, body)
 VALUES (?, ?)
 SQL
-  "/abc123"
+  "/#{name}"
 end
 
 get "/:paste_name" do
