@@ -2,6 +2,7 @@ require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
 require "pry"
+require "fileutils"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

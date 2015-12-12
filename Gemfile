@@ -11,3 +11,4 @@ end
 gem "rake"
 gem "sinatra"
 gem "unicorn"
+gem "sqlite3"
