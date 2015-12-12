@@ -21,7 +21,7 @@ Usage:
   http://example.org/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
 
   $ curl http://example.org/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
-  "hello, world"
+  hello, world
 </pre>
       USAGE
     end
