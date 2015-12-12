@@ -28,6 +28,19 @@ Usage:
     end
   end
 
+  describe "POST /" do
+    it "creates a paste" do
+      post "/", "hello, world!"
+
+      last_paste_body = app.db.execute(<<-SQL).flatten.first
+SELECT body FROM pastes ORDER BY rowid DESC LIMIT 1
+SQL
+
+      expect(last_paste_body).to eql "hello, world!"
+      expect(last_response.body).to eql "http://example.org/abc123"
+    end
+  end
+
   describe "server start" do
     before do
       FileUtils.rm("test.db") if File.exist?("test.db")
