@@ -19,7 +19,7 @@ RSpec.describe "netcopy_server.rb" do
 Usage:
 
   $ echo "hello, world" | curl http://example.org -d @-
-  /3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
+  http://example.org/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
 
   $ curl http://example.org/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
   "hello, world"
@@ -53,7 +53,7 @@ SQL
   describe "GET /:paste_name" do
     it "returns the body of the specified paste" do
       post "/", "hello, world!"
-      get last_response.body
+      get last_response.body.sub(last_request.base_url, "")
 
       expect(last_response.body).to eql "hello, world!"
     end

@@ -40,7 +40,7 @@ end
 post "/" do
   name = SecureRandom.uuid
   create_paste(name, request.body.read)
-  "/#{name}"
+  "#{request.base_url}/#{name}"
 end
 
 get "/:paste_name" do

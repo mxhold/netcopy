@@ -2,7 +2,7 @@
 Usage:
 
   $ echo "hello, world" | curl <%= request.base_url %> -d @-
-  /3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
+  <%= request.base_url %>/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
 
   $ curl <%= request.base_url %>/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
   "hello, world"
