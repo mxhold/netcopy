@@ -79,7 +79,7 @@ SQL
         paste_table_info = app.db.table_info("pastes")
 
         expect(paste_table_info[0]["name"]).to eql "name"
-        expect(paste_table_info[0]["type"]).to eql "VARCHAR(30)"
+        expect(paste_table_info[0]["type"]).to eql "TEXT"
 
         expect(paste_table_info[1]["name"]).to eql "body"
         expect(paste_table_info[1]["type"]).to eql "BLOB"

@@ -8,7 +8,7 @@ set(:startup_hook) do
   if first_run
     db.execute <<-SQL
 CREATE TABLE pastes (
-  name VARCHAR(30),
+  name TEXT,
   body BLOB
 )
     SQL
