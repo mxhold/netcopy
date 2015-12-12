@@ -22,7 +22,7 @@ To start the server at <http://localhost:8080>, run:
 
 ## Usage
 
-    $ echo "hello, world" | curl http://localhost:8080 -d @-
+    $ echo "hello, world" | curl http://localhost:8080 --data-binary @-
     http://localhost:8080/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
 
     $ curl http://localhost:8080/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6

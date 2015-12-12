@@ -17,7 +17,7 @@ RSpec.describe "netcopy_server.rb" do
 <pre>
 Usage:
 
-  $ echo "hello, world" | curl http://example.org -d @-
+  $ echo "hello, world" | curl http://example.org --data-binary @-
   http://example.org/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
 
   $ curl http://example.org/3cdf55b6-2ffe-42c9-97be-d94ef66e58c6
