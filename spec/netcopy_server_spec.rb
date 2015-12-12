@@ -37,7 +37,16 @@ SELECT body FROM pastes ORDER BY rowid DESC LIMIT 1
 SQL
 
       expect(last_paste_body).to eql "hello, world!"
-      expect(last_response.body).to eql "http://example.org/abc123"
+      expect(last_response.body).to eql "/abc123"
+    end
+  end
+
+  describe "GET /:paste_name" do
+    it "returns the body of the specified paste" do
+      post "/", "hello, world!"
+      get last_response.body
+
+      expect(last_response.body).to eql "hello, world!"
     end
   end
 
@@ -61,10 +70,10 @@ SQL
         paste_table_info = app.db.table_info("pastes")
 
         expect(paste_table_info[0]["name"]).to eql "name"
-        expect(paste_table_info[0]["type"]).to eql "varchar(30)"
+        expect(paste_table_info[0]["type"]).to eql "VARCHAR(30)"
 
         expect(paste_table_info[1]["name"]).to eql "body"
-        expect(paste_table_info[1]["type"]).to eql "blob"
+        expect(paste_table_info[1]["type"]).to eql "BLOB"
       end
     end
 

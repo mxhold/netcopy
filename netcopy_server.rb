@@ -7,10 +7,10 @@ set(:startup_hook) do
   set(:db, SQLite3::Database.new(database_file))
   if first_run
     db.execute <<-SQL
-      create table pastes (
-        name varchar(30),
-        body blob
-      );
+CREATE TABLE pastes (
+  name VARCHAR(30),
+  body BLOB
+)
     SQL
   end
 end
@@ -31,8 +31,14 @@ end
 
 post "/" do
   app.db.execute(<<-SQL, ["abc123", request.body.read])
-  INSERT INTO pastes (name, body)
-  VALUES (?, ?)
+INSERT INTO pastes (name, body)
+VALUES (?, ?)
 SQL
-  request.base_url + "/abc123"
+  "/abc123"
+end
+
+get "/:paste_name" do
+  app.db.execute(<<-SQL, [params["paste_name"]]).flatten.first
+SELECT body FROM pastes WHERE name = ?
+SQL
 end
