@@ -20,8 +20,16 @@ configure do
 end
 
 helpers do
-  def app
-    Sinatra::Application
+  def execute(sql, bindings)
+    Sinatra::Application.db.execute(sql, bindings)
+  end
+
+  def create_paste(name, body)
+    execute("INSERT INTO PASTES (name, body) VALUES (?, ?)", [name, body])
+  end
+
+  def find_paste(name)
+    execute("SELECT body FROM pastes WHERE name = ?", [name]).flatten.first
   end
 end
 
@@ -31,15 +39,11 @@ end
 
 post "/" do
   name = SecureRandom.uuid
-  app.db.execute(<<-SQL, [name, request.body.read])
-INSERT INTO pastes (name, body)
-VALUES (?, ?)
-SQL
+  create_paste(name, request.body.read)
   "/#{name}"
 end
 
 get "/:paste_name" do
-  app.db.execute(<<-SQL, [params["paste_name"]]).flatten.first
-SELECT body FROM pastes WHERE name = ?
-SQL
+  body = find_paste(params["paste_name"])
+  body
 end
